@@ -33,7 +33,7 @@ endif
 
 let g:mapleader = "\<Space>"
 set cursorline          " show cursorline
-" set colorcolumn=80
+set colorcolumn=80
 " }}}
 
 
@@ -52,7 +52,7 @@ Plug 'python-mode/python-mode', { 'for': 'python' }                 " Enhancemen
 Plug 'scrooloose/nerdtree'                                          " File tree
 Plug 'airblade/vim-gitgutter'                                       " Track git changes
 " Plug 'Yggdroot/indentline'                                          " Visual indent lines
-" Plug 'BurningEther/iron.nvim', { 'do': ':UpdateRemotePlugins' }     " Repls for various languages
+Plug 'hkupty/iron.nvim', { 'do': ':UpdateRemotePlugins' }           " Repls for various languages
 " Plug 'jalvesaq/Nvim-R'                                              " Enhancements for R
 
 " LSP
@@ -65,12 +65,15 @@ Plug 'autozimu/LanguageClient-neovim', {
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 " Language Support
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }                        " Enhancements for Rust
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'Shougo/neco-vim', { 'for': 'vim' }                            " Vim script support / linting
-Plug 'Hyleus/vim-python-syntax', { 'for': 'python' }                " Python syntax, supports PythonDocstring
+Plug 'vim-python/python-syntax'
+Plug 'plasticboy/vim-markdown'
+" Plug 'Hyleus/vim-python-syntax', { 'for': 'python' }                " Python syntax, supports PythonDocstring
 " Plug 'gaalcaras/ncm-R'                                              " R auto-completion
 " Plug 'davidhalter/jedi'
 
@@ -104,13 +107,16 @@ colorscheme subtle_dark
 
 
 
-set laststatus=0
-" set statusline=
-" set statusline+=\ %F\ %*                                         " Show filename
-" set statusline+=\ %m                                             " Show file modification indicator
-" set statusline+=%=                                               " Switch sides
+set laststatus=2
+set statusline=%=
+set statusline+=%2*\ *                                               " Switch sides
+set statusline+=%1*\ %f                                            " Show filename
+set statusline+=%2*\ %m                                            " Show file modification indicator
 " set statusline+=\ %{LinterStatus()}                              " Show ALE lint warnings / errors
 " set statusline+=\ branch(%{gitbranch#name()})\                   " Show Git branch
+
+hi User1 guifg=#eee8d5 guibg=#073642 ctermfg=7 ctermbg=0
+hi User2 guifg=#dc322f guibg=#073642 ctermfg=1 ctermbg=0
 " }}}
 
 
@@ -144,13 +150,17 @@ let g:NERDTrimTrailingWhitespace = 1
 
 
 " << GO >> {{{
+"
 
 let g:go_highlight_fields = 1
 let g:go_highlight_structs = 1
+" let g:go_highlight_variable_assignments = 1
 let g:go_highlight_types = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_functions = 1
+let g:go_highlight_function_arguments = 1
+let g:go_highlight_function_calls = 1
 
 let g:go_fmt_command = 'goimports'
 
@@ -189,8 +199,11 @@ let g:deoplete#enable_at_startup = 1
 
 call deoplete#custom#option({ 'auto_complete_delay': 3, 'max_list': 50 })
 
-let g:deoplete#sources#rust#racer_binary='/Users/Kade.Killary/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path='/Users/Kade.Killary/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
+let g:deoplete#sources#rust#racer_binary = '/Users/Kade.Killary/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path = '/Users/Kade.Killary/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
+
+let g:deoplete#sources#go#gocode_binary = '/Users/Kade.Killary/gonads/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 
 " nmap <buffer> gd <plug>DeopleteRustGoToDefinitionSplit
 " nmap <buffer> K  <plug>DeopleteRustShowDocumentation
@@ -207,12 +220,14 @@ let g:rustfmt_autosave = 1
 
 " << IRON.VIM >> {{{
 
-" let g:iron_repl_open_cmd = 'vsplit'
-" let g:iron_map_defaults = 0
+nnoremap <leader>ir :IronRepl<CR>
 
-" nmap + <Plug>(iron-send-motion)
-" vmap + <Plug>(iron-send-motion)
-" nmap rr <Plug>(iron-repeat-cmd)
+" let g:iron_repl_open_cmd = 'vsplit'
+let g:iron_map_defaults = 0
+
+nmap + <Plug>(iron-send-motion)
+vmap + <Plug>(iron-send-motion)
+nmap rr <Plug>(iron-repeat-cmd)
 " }}}
 
 
@@ -236,6 +251,9 @@ let g:rustfmt_autosave = 1
 
 
 " << PYTHON >> {{{
+
+" vim python sytnax plug
+let g:python_highlight_all = 1
 
 " pymode
 let g:pymode_syntax_all = 1
@@ -270,6 +288,7 @@ augroup FileOptions
   autocmd Filetype python setlocal sts=4 sw=4 wrap
   " autocmd Filetype r setlocal ts=2 sw=2 sts=2 expandtab
   autocmd Filetype r setlocal ts=2 sw=2
+  autocmd BufRead,BufNewFile *.md set wrap
   autocmd Filetype javascript setlocal ts=2 sw=2 sts=2 syntax=javascript
   " https://calebthompson.io/crontab-and-vim-sitting-in-a-tree
   autocmd Filetype crontab setlocal nobackup nowritebackup
