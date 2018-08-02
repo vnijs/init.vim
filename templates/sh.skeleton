@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#
+# DESC:
+# ARGS:
+# OUT:
+# NOTE:
+#
+# [Author]: Kade Killary
+#
+
+set -o errexit  # Exit on most errors
+set -o xtrace   # Trace execution
