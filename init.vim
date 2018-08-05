@@ -74,18 +74,20 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'plasticboy/vim-markdown'
 Plug 'vim-python/python-syntax', { 'for': 'python' }
+Plug 'ambv/black'
 " Plug 'gaalcaras/ncm-R'                                              " R auto-completion
 
 " colorschemes
 Plug 'kadekillary/subtle_solo'
+Plug 'kadekillary/skull-vim'
 
 call plug#end()
 "
 
 " << COLORSCHEMES >>
-set background=light
+set background=dark
 
-colorscheme subtle_light
+colorscheme skull
 " 
 
 
@@ -107,16 +109,16 @@ colorscheme subtle_light
 
 
 set laststatus=2
-set statusline=%1*
-set statusline+=%2*\ *                                               " Switch sides
-set statusline+=%1*\ %f                                            " Show filename
-set statusline+=%2*\ %m                                            " Show file modification indicator
+set statusline=
+set statusline+=\ *                                               " Switch sides
+set statusline+=\ %f                                            " Show filename
+set statusline+=\ %m                                            " Show file modification indicator
 " set statusline+=\ %{LinterStatus()}                              " Show ALE lint warnings / errors
 " set statusline+=\ branch(%{gitbranch#name()})\                   " Show Git branch
 
 " subtle_light colors
-hi User1 guifg=#000000 guibg=#eee8d5 gui=BOLD ctermfg=0
-hi User2 guifg=#268bd2 guibg=#eee8d5 gui=BOLD ctermfg=1
+" hi User1 guifg=#000000 guibg=#eee8d5 gui=BOLD ctermfg=0
+" hi User2 guifg=#268bd2 guibg=#eee8d5 gui=BOLD ctermfg=1
 " subtle_dark colors
 " hi User1 guifg=#2aa198 guibg=#073642 ctermfg=0
 " hi User2 guifg=#ffffff guibg=#073642 ctermfg=1
@@ -264,6 +266,11 @@ nmap rr <Plug>(iron-repeat-cmd)
 
 
 " << PYTHON >> 
+
+augroup PythonFMT
+    autocmd!
+    autocmd BufWritePre *.py execute ':Black'
+augroup END
 
 let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
