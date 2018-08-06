@@ -52,7 +52,6 @@ Plug 'python-mode/python-mode', { 'branch': 'develop' }
 Plug 'scrooloose/nerdtree'                                          " File tree
 Plug 'airblade/vim-gitgutter'                                       " Track git changes
 Plug 'hkupty/iron.nvim', { 'do': ':UpdateRemotePlugins' }           " Repls for various languages
-Plug 'mzlogin/vim-markdown-toc'
 " Plug 'Yggdroot/indentline'                                          " Visual indent lines
 " Plug 'jalvesaq/Nvim-R'                                              " Enhancements for R
 
@@ -79,15 +78,14 @@ Plug 'ambv/black'
 
 " colorschemes
 Plug 'kadekillary/subtle_solo'
-Plug 'kadekillary/skull-vim'
 
 call plug#end()
 "
 
 " << COLORSCHEMES >>
-set background=dark
+set background=light
 
-colorscheme skull
+colorscheme subtle_light
 " 
 
 
@@ -110,15 +108,15 @@ colorscheme skull
 
 set laststatus=2
 set statusline=
-set statusline+=\ *                                               " Switch sides
-set statusline+=\ %f                                            " Show filename
-set statusline+=\ %m                                            " Show file modification indicator
+set statusline+=%1*\ *                                               " Switch sides
+set statusline+=%2*\ %f                                            " Show filename
+set statusline+=%1*\ %m                                            " Show file modification indicator
 " set statusline+=\ %{LinterStatus()}                              " Show ALE lint warnings / errors
 " set statusline+=\ branch(%{gitbranch#name()})\                   " Show Git branch
 
 " subtle_light colors
-" hi User1 guifg=#000000 guibg=#eee8d5 gui=BOLD ctermfg=0
-" hi User2 guifg=#268bd2 guibg=#eee8d5 gui=BOLD ctermfg=1
+hi User1 guifg=#000000 guibg=#eee8d5 gui=BOLD ctermfg=0
+hi User2 guifg=#268bd2 guibg=#eee8d5 gui=BOLD ctermfg=1
 " subtle_dark colors
 " hi User1 guifg=#2aa198 guibg=#073642 ctermfg=0
 " hi User2 guifg=#ffffff guibg=#073642 ctermfg=1
