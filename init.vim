@@ -78,14 +78,15 @@ Plug 'ambv/black'
 
 " colorschemes
 Plug 'kadekillary/subtle_solo'
+Plug 'renechz/tiki.vim'
 
 call plug#end()
 "
 
 " << COLORSCHEMES >>
-set background=light
+set background=dark
 
-colorscheme subtle_light
+colorscheme tiki_machine
 " 
 
 
@@ -108,7 +109,7 @@ colorscheme subtle_light
 
 set laststatus=2
 set statusline=
-set statusline+=%1*\ *                                               " Switch sides
+set statusline=%1*\ *                                               " Switch sides
 set statusline+=%2*\ %f                                            " Show filename
 set statusline+=%1*\ %m                                            " Show file modification indicator
 " set statusline+=\ %{LinterStatus()}                              " Show ALE lint warnings / errors
