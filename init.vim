@@ -435,6 +435,7 @@ set lazyredraw          " redraw onlw when needed
 augroup FileTemplates
     autocmd!
     autocmd BufNewFile *.sh 0r ~/.config/nvim/templates/sh.skeleton
+    autocmd BufNewFile *.py 0r ~/.config/nvim/templates/py.skeleton
 augroup END
 " 
 
