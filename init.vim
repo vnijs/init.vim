@@ -53,7 +53,7 @@ Plug 'scrooloose/nerdtree'                                          " File tree
 Plug 'airblade/vim-gitgutter'                                       " Track git changes
 Plug 'hkupty/iron.nvim', { 'do': ':UpdateRemotePlugins' }           " Repls for various languages
 Plug 'Yggdroot/indentline'                                          " Visual indent lines
-" Plug 'jalvesaq/Nvim-R'                                              " Enhancements for R
+Plug 'jalvesaq/Nvim-R'                                              " Enhancements for R
 
 " NCM2
 Plug 'roxma/nvim-yarp'
@@ -70,10 +70,10 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ }
 
 " enable ncm2 for all buffers
-augroup NCM
-    autocmd!
-    autocmd BufEnter * call ncm2#enable_for_buffer()
-augroup END
+" augroup NCM
+"   autocmd!
+"   autocmd BufEnter * call ncm2#enable_for_buffer()
+" augroup END
 
 " enable popupopen
 set completeopt=noinsert,menuone,noselect
@@ -85,7 +85,7 @@ Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'plasticboy/vim-markdown'
 Plug 'vim-python/python-syntax', { 'for': 'python' }
 Plug 'ambv/black'
-" Plug 'gaalcaras/ncm-R'                                              " R auto-completion
+Plug 'gaalcaras/ncm-R'                                              " R auto-completion
 
 " colorschemes
 Plug 'kadekillary/subtle_solo'
@@ -96,7 +96,7 @@ call plug#end()
 " << COLORSCHEMES >>
 set background=dark
 
-colorscheme subtle_dark
+"colorscheme subtle_dark
 "
 
 " << STATUSLINE >>
